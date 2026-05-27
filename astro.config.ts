@@ -1,7 +1,6 @@
 import { rehypeHeadingIds } from '@astrojs/markdown-remark'
-import vercel from '@astrojs/vercel'
 import AstroPureIntegration from 'astro-pure'
-import { defineConfig, fontProviders } from 'astro/config'
+import { defineConfig } from 'astro/config'
 import rehypeKatex from 'rehype-katex'
 import remarkMath from 'remark-math'
 
@@ -25,10 +24,10 @@ import config from './src/site.config.ts'
 // https://astro.build/config
 export default defineConfig({
   // [Basic]
-  site: 'https://astro-pure.js.org',
+  site: 'https://relliant.github.io',
   // Deploy to a sub path
   // https://astro-pure.js.org/docs/setup/deployment#platform-with-base-path
-  // base: '/astro-pure/',
+  base: '/siyuluo.github.io/',
   trailingSlash: 'never',
   // root: './my-project-directory',
   server: { host: true },
@@ -38,10 +37,9 @@ export default defineConfig({
     defaultStrategy: 'viewport'
   },
 
-  // [Adapter]
-  // https://docs.astro.build/en/guides/deploy/
-  adapter: vercel({ imageService: true }),
-  output: 'server',
+  // [Output]
+  // GitHub Pages requires static output
+  output: 'static',
   // Local (standalone)
   // adapter: node({ mode: 'standalone' }),
   // output: 'server',
@@ -53,23 +51,6 @@ export default defineConfig({
     // domains: ['ghchart.rshah.org'],
     remotePatterns: [{ protocol: 'https' }]
   },
-  // Enable font preloading and optimization
-  // https://docs.astro.build/en/guides/fonts/
-  fonts: [
-    {
-      provider: fontProviders.fontshare(),
-      name: 'Satoshi',
-      cssVariable: '--font-satoshi',
-      // Default included:
-      // weights: [400],
-      // styles: ["normal", "italics"],
-      // subsets: ["cyrillic-ext", "cyrillic", "greek-ext", "greek", "vietnamese", "latin-ext", "latin"],
-      // fallbacks: ["sans-serif"],
-      styles: ['normal', 'italic'],
-      weights: [400, 500],
-      subsets: ['latin']
-    }
-  ],
 
   // [Markdown]
   markdown: {
