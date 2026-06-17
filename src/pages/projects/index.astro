@@ -166,6 +166,63 @@ const meta = {
         </div>
       </Card>
 
+      <h2 id='yolov8-and-moveit2-based-object-pick-and-place'>
+        YOLOv8 and MoveIt 2 based Object Pick-and-Place
+      </h2>
+      <Card subheading='Oct 16, 2025 - Dec 29, 2025'>
+        <ul class='ms-4 list-disc text-muted-foreground'>
+          <li>
+            Project overview: Built a full object pick-and-place pipeline for a humanoid robot in Isaac Sim,
+            using YOLOv8 for object detection and MoveIt 2 for dual-arm motion planning. The system completed
+            grasping through inverse kinematics in simulation and was finally deployed on real hardware to
+            grasp specified objects.
+          </li>
+          <li>
+            High-fidelity simulation platform: Created a realistic Isaac Sim environment, configured USD
+            assets, and provided the base simulation platform for algorithm validation. Implemented ROS2 SDK
+            interfaces consistent with the real robot and used ZMQ to bridge ROS and Isaac Sim communication.
+          </li>
+          <li>
+            VLM deployment and object recognition: Deployed a VLM on the robot body so the robot could
+            identify target objects, and used camera calibration to perform accurate TF transformations from
+            perception results to the target grasp pose.
+          </li>
+          <li>
+            MoveIt 2 configuration and IK solving: Configured MoveIt 2 for the humanoid robot dual arms,
+            enabling the robot to receive Cartesian-space grasp targets, convert them into joint-space
+            commands through inverse kinematics, and execute correct grasping motions through ROS interfaces.
+          </li>
+        </ul>
+        <div class='not-prose mb-3 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3'>
+          <video
+            class='aspect-video w-full rounded-xl border object-cover'
+            controls
+            autoplay
+            muted
+            loop
+            playsinline
+            preload='metadata'
+            poster='/images/social-card.png'
+          >
+            <source src='/videos/grasp_ik_demo1.mp4' type='video/mp4' />
+            Your browser does not support the video tag.
+          </video>
+          <video
+            class='aspect-video w-full rounded-xl border object-cover'
+            controls
+            autoplay
+            muted
+            loop
+            playsinline
+            preload='metadata'
+            poster='/images/social-card.png'
+          >
+            <source src='/videos/grasp_ik_demo2.mov' type='video/quicktime' />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </Card>
+
       <h2 id='simulation-and-control-of-the-tiago-mobile-manipulator-in-gazebo'>
         Simulation and Control of the TIAGo Mobile Manipulator in Gazebo
       </h2>
