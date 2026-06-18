@@ -1,7 +1,8 @@
 ---
-import { Footer, Header, ThemeProvider } from 'astro-pure/components/basic'
+import { Footer, ThemeProvider } from 'astro-pure/components/basic'
 import type { SiteMeta } from 'astro-pure/types'
 import BaseHead from '@/components/BaseHead.astro'
+import Header from '@/components/basic/Header.astro'
 import config from '@/site-config'
 
 // Import the global.css file here so that it is included on
@@ -12,16 +13,20 @@ import '@/assets/styles/app.css'
 interface Props {
   meta: SiteMeta
   highlightColor?: string
+  lang?: 'en' | 'zh'
 }
 
 const {
   meta: { articleDate, description = config.description, ogImage, title },
   highlightColor,
+  lang = 'en',
   ...props
 } = Astro.props
+
+const htmlLang = lang === 'zh' ? 'zh-CN' : config.locale.lang
 ---
 
-<html lang={config.locale.lang}>
+<html lang={htmlLang}>
   <head>
     <BaseHead {articleDate} {description} {ogImage} {title} />
     <ThemeProvider />
@@ -41,7 +46,7 @@ const {
       id='main-container'
       class='w-full max-w-[70rem] min-h-[100dvh] flex flex-col justify-between'
     >
-      <Header />
+      <Header lang={lang} currentPath={Astro.url.pathname} />
       <div class='flex-1 w-full'>
         <slot />
       </div>

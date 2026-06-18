@@ -1,0 +1,237 @@
+---
+import { Image } from 'astro:assets'
+
+import { Quote } from 'astro-pure/advanced'
+import { Button, Card, Icon, Label } from 'astro-pure/user'
+import Section from '@/components/home/Section.astro'
+import SkillLayout from '@/components/home/SkillLayout.astro'
+import config from '@/site-config'
+
+type Lang = 'en' | 'zh'
+
+interface Props {
+  lang?: Lang
+}
+
+const { lang = 'en' } = Astro.props
+const isZh = lang === 'zh'
+
+const languages = ['Python', 'C++', 'Shell', 'MATLAB']
+const robotics = ['ROS1/2', 'MoveIt', 'Gazebo', 'MuJoCo', 'Isaac Lab', 'Isaac Gym']
+const learningControl = [
+  'PPO',
+  'AMP',
+  'Sim2Real',
+  'Domain Randomization',
+  'IK',
+  'Motion Retargeting'
+]
+
+const copy = {
+  en: {
+    location: 'Shenzhen, China',
+    contact: 'Get Contact',
+    about: 'About',
+    role: 'Developer / MS Student',
+    intro:
+      "Hi! I am a master's student in Computer Technology at the College of Application and Technology, Shenzhen University. My current research focuses on learning-based whole-body control for humanoid robots. My ultimate goal is to build truly intelligent humanoid robots that can seamlessly integrate into and serve in real-world human environments.",
+    moreAbout: 'More about me',
+    education: 'Education',
+    degree: 'Computer Technology',
+    educationDate: 'September 2025 - July 2028',
+    projects: 'Projects',
+    projectDetail: 'View project details',
+    publications: 'Publications',
+    publicationDetail: 'View publication details',
+    skills: 'Skills',
+    skillLanguages: 'Languages',
+    skillRobotics: 'Robotics',
+    skillLearning: 'Learning & Control',
+    projectCards: [
+      {
+        heading: 'Deployment of a Whole-Body Control Algorithm for Humanoid Robots',
+        subheading: 'Apr 10, 2026 - May 07, 2026',
+        description:
+          'Delivered end-to-end motion retargeting, RL policy training, and Sim2Real deployment for Walker Tienkung (30-DoF), achieving zero-shot trajectory tracking and stable walking; related paper is under review at NeurIPS 2026.'
+      },
+      {
+        heading: 'Humanoid Robot Music Conductor',
+        subheading: 'May 10, 2026 - May 21, 2026',
+        description:
+          'Built a conducting-motion pipeline from video pose extraction to IK remapping, trained a stable upper-body control policy, and deployed a fused controller for smooth, high-fidelity real-robot conducting at 50Hz.'
+      },
+      {
+        heading: 'YOLOv8 and MoveIt 2 based Object Pick-and-Place',
+        subheading: 'Oct 16, 2025 - Dec 29, 2025',
+        description:
+          'Built a humanoid dual-arm pick-and-place pipeline with YOLOv8 perception, VLM-based target recognition, Isaac Sim validation, ROS2-ZMQ communication, and MoveIt 2 IK planning for simulation-to-hardware grasping.'
+      },
+      {
+        heading: 'Simulation and Control of the TIAGo Mobile Manipulator in Gazebo',
+        subheading: 'May 16, 2025 - May 29, 2025',
+        description:
+          'Implemented a full ROS + MoveIt! pick-and-place workflow in Gazebo, including OMPL-based planning, trajectory smoothing, and autonomous navigation with precise end-effector alignment.'
+      }
+    ],
+    publicationHeading:
+      'ATOM: A Training Framework for Humanoid Behavior Foundation Models with Imperfect Data',
+    publicationSubheading: 'NeurIPS 2026 (Under Review)',
+    publicationDescription:
+      'Proposes a training framework for humanoid behavior foundation models under imperfect data conditions, grounded in our whole-body control deployment and Sim2Real validation results.'
+  },
+  zh: {
+    location: '中国深圳',
+    contact: '联系我',
+    about: '关于我',
+    role: '开发者 / 硕士研究生',
+    intro:
+      '你好！我是深圳大学应用技术学院计算机技术专业硕士研究生，目前的研究方向是基于学习的人形机器人全身控制。我的长期目标是构建真正智能、能够自然融入并服务真实人类环境的人形机器人。',
+    moreAbout: '了解更多',
+    education: '教育经历',
+    degree: '计算机技术',
+    educationDate: '2025 年 9 月 - 2028 年 7 月',
+    projects: '项目经历',
+    projectDetail: '查看项目详情',
+    publications: '论文成果',
+    publicationDetail: '查看论文详情',
+    skills: '技能',
+    skillLanguages: '编程语言',
+    skillRobotics: '机器人',
+    skillLearning: '学习与控制',
+    projectCards: [
+      {
+        heading: '人形机器人全身控制算法部署',
+        subheading: '2026 年 4 月 10 日 - 2026 年 5 月 7 日',
+        description:
+          '完成 Walker Tienkung（30 自由度）机器人从动作重定向、强化学习策略训练到 Sim2Real 部署的全流程，实现零样本轨迹跟踪与稳定行走，相关论文已投稿 NeurIPS 2026。'
+      },
+      {
+        heading: '人形机器人音乐指挥',
+        subheading: '2026 年 5 月 10 日 - 2026 年 5 月 21 日',
+        description:
+          '构建从视频姿态提取、IK 重映射到上半身控制策略训练的动作生成流程，并部署融合控制器，在真机上实现 50Hz 平滑、高保真的指挥动作。'
+      },
+      {
+        heading: '基于 YOLOv8 和 MoveIt 2 的物体抓取与放置',
+        subheading: '2025 年 10 月 16 日 - 2025 年 12 月 29 日',
+        description:
+          '构建人形机器人双臂抓取放置流程，结合 YOLOv8 感知、VLM 目标识别、Isaac Sim 仿真验证、ROS2-ZMQ 通信与 MoveIt 2 IK 规划，实现从仿真到真机的指定物体抓取。'
+      },
+      {
+        heading: 'TIAGo 移动机械臂在 Gazebo 中的仿真与控制',
+        subheading: '2025 年 5 月 16 日 - 2025 年 5 月 29 日',
+        description:
+          '基于 ROS 和 MoveIt! 实现 TIAGo 移动机械臂完整抓取放置流程，包括 OMPL 路径规划、轨迹平滑、自主导航和末端执行器精准对齐。'
+      }
+    ],
+    publicationHeading: 'ATOM：面向不完美数据的人形机器人行为基础模型训练框架',
+    publicationSubheading: 'NeurIPS 2026（审稿中）',
+    publicationDescription:
+      '提出一种面向不完美数据条件的人形机器人行为基础模型训练框架，研究基础来自全身控制部署与 Sim2Real 验证结果。'
+  }
+}
+
+const t = copy[lang]
+const projectHref = isZh ? '/zh/projects' : '/projects'
+const docsHref = isZh ? '/zh/docs' : '/docs'
+const aboutHref = isZh ? '/zh/about' : '/about'
+
+const imagePath = config.logo.src
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/*.{jpeg,jpg,png,gif,avif,webp}'
+)
+if (!images[imagePath])
+  throw new Error(
+    `"${imagePath}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif,avif,webp}"`
+  )
+---
+
+<main class='flex w-full flex-col items-center'>
+  <section class='animate mb-10 flex flex-col items-center gap-y-7' id='content-header'>
+    <Image
+      src={images[imagePath]()}
+      alt={config.logo.alt || 'Profile'}
+      class='h-28 w-auto rounded-full border p-1'
+      loading='eager'
+      fetchpriority='high'
+    />
+
+    <div class='flex flex-col items-center gap-y-4'>
+      <h1 class='text-3xl font-medium'>{config.author}</h1>
+      <div class='flex flex-wrap justify-center gap-x-7 gap-y-3'>
+        <Label title={t.location}>
+          <Icon name='location' class='size-5' slot='icon' />
+        </Label>
+        <Label title='GitHub' as='a' href='https://github.com/relliant' target='_blank'>
+          <Icon name='github' class='size-5' slot='icon' />
+        </Label>
+      </div>
+    </div>
+
+    <a
+      href='https://github.com/relliant'
+      target='_blank'
+      class='flex flex-row items-center gap-x-3 rounded-full border bg-background px-4 py-2 text-sm shadow-sm transition-shadow hover:shadow-md'
+    >
+      <span class='relative flex items-center justify-center'>
+        <span
+          class='absolute size-2 animate-ping rounded-full border border-green-400 bg-green-400 opacity-75'
+        ></span>
+        <span class='size-2 rounded-full bg-green-400'></span>
+      </span>
+      <p class='font-medium text-muted-foreground'>{t.contact}</p>
+    </a>
+  </section>
+
+  <div id='content' class='animate flex flex-col gap-y-10 md:w-4/5 lg:w-5/6'>
+    <Section title={t.about}>
+      <p class='text-muted-foreground'>{t.role}</p>
+      <p class='text-muted-foreground'>{t.intro}</p>
+      <Button title={t.moreAbout} class='w-fit self-end' href={aboutHref} variant='ahead' />
+    </Section>
+
+    <Section title={t.education}>
+      <Card
+        as='a'
+        heading='Shenzhen University'
+        subheading={t.degree}
+        date={t.educationDate}
+        href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+      />
+    </Section>
+
+    <Section title={t.projects}>
+      <div class='flex flex-col gap-6'>
+        {
+          t.projectCards.map((project) => (
+            <Card heading={project.heading} subheading={project.subheading}>
+              <p class='text-muted-foreground'>{project.description}</p>
+            </Card>
+          ))
+        }
+
+        <div class='flex justify-end'>
+          <Button title={t.projectDetail} class='w-fit' href={projectHref} variant='ahead' />
+        </div>
+      </div>
+    </Section>
+
+    <Section title={t.publications}>
+      <div class='flex flex-col gap-4'>
+        <Card heading={t.publicationHeading} subheading={t.publicationSubheading} date='2026'>
+          <p class='text-muted-foreground'>{t.publicationDescription}</p>
+        </Card>
+        <div class='flex justify-end'>
+          <Button title={t.publicationDetail} class='w-fit' href={docsHref} variant='ahead' />
+        </div>
+      </div>
+    </Section>
+
+    <Section title={t.skills}>
+      <SkillLayout title={t.skillLanguages} skills={languages} />
+      <SkillLayout title={t.skillRobotics} skills={robotics} />
+      <SkillLayout title={t.skillLearning} skills={learningControl} />
+    </Section>
+  </div>
+  <Quote class='mt-12' />
+</main>

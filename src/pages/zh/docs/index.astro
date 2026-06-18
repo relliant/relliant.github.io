@@ -1,0 +1,61 @@
+---
+import { Image } from 'astro:assets'
+
+import { Button, Card } from 'astro-pure/user'
+import PageLayout from '@/layouts/BaseLayout.astro'
+import publicationCover from '@/assets/intro_pic.png'
+
+const meta = {
+  title: '论文成果',
+  description: '论文与相关说明'
+}
+---
+
+<PageLayout {meta} lang='zh'>
+  <Button title='返回' href='/zh' variant='back' />
+  <main class='mt-6 lg:mt-10'>
+    <div id='content-header' class='animate'>
+      <h1 class='mb-6 mt-6 text-3xl font-medium sm:mt-10'>论文成果</h1>
+    </div>
+
+    <section
+      aria-label='论文成果'
+      id='content'
+      class='animate prose mt-8 max-w-none text-base md:min-w-[45ch]'
+    >
+      <h2 class='text-xl font-medium'>预印本</h2>
+      <div class='not-prose flex flex-col gap-4'>
+        <Card
+          heading='ATOM：面向不完美数据的人形机器人行为基础模型训练框架'
+          subheading='NeurIPS 2026（审稿中）'
+          date='2026'
+        >
+          <Image
+            src={publicationCover}
+            alt='ATOM paper preview'
+            class='mb-3 mt-1 h-auto w-full rounded-xl border object-cover'
+            loading='lazy'
+          />
+          <p class='text-muted-foreground'>
+            提出一种面向不完美数据条件的人形机器人行为基础模型训练框架，研究基础来自全身控制部署与
+            Sim2Real 验证结果。
+          </p>
+          <div class='mt-3 flex flex-wrap gap-2'>
+            <Button
+              title='论文预印本'
+              href='https://www.researchgate.net/publication/405276407_ATOM_A_Training_Framework_for_Humanoid_Behavior_Foundation_Models_with_Imperfect_Data'
+              target='_blank'
+              variant='ahead'
+            />
+            <Button
+              title='项目地址'
+              href='https://github.com/relliant/WholeBodyControl-PolicyTraining'
+              target='_blank'
+              variant='ahead'
+            />
+          </div>
+        </Card>
+      </div>
+    </section>
+  </main>
+</PageLayout>

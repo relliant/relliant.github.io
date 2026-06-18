@@ -1,0 +1,266 @@
+---
+import { Button, Card } from 'astro-pure/user'
+
+type Lang = 'en' | 'zh'
+
+interface Props {
+  lang?: Lang
+}
+
+const { lang = 'en' } = Astro.props
+const isZh = lang === 'zh'
+
+const copy = {
+  en: {
+    back: 'Back',
+    title: 'Projects',
+    intro: 'Detailed project portfolio and technical highlights.',
+    projectAddress: 'Project address',
+    projects: [
+      {
+        id: 'deployment-of-a-full-body-motion-control-algorithm-for-humanoid-robots',
+        title: 'Deployment of a whole-body Control Algorithm for Humanoid Robots',
+        date: 'Apr 10, 2026 - May 07, 2026',
+        items: [
+          'Motion retargeting: Performed secondary development based on the open-source GMR toolkit, completed kinematic adaptation for Walker Tienkung (1.73m, 65kg, 30-DoF), and successfully converted human motion capture data in npz, bvh, and fbx formats into executable pkl joint trajectories for the robot.',
+          'Reinforcement learning training: Built a distributed parallel simulation environment with Isaac Lab/Gym and trained policies with PPO and AMP. Iteratively optimized reward design based on reward curve analysis, and validated Sim2Sim policy transfer in a high-fidelity MuJoCo environment.',
+          'Real-robot deployment (Sim2Real): To address dynamics gaps on hardware, applied domain randomization and delayed-signal enhancement for improved robustness, and ultimately achieved zero-shot trajectory tracking and stable walking on the Walker Tienkung robot.',
+          'Paper writing: Based on this project, summarized the research outcomes and prepared the paper ATOM: A Training Framework for Humanoid Behavior Foundation Models with Imperfect Data, currently submitted to NeurIPS 2026 (under review).'
+        ],
+        videos: [
+          {
+            src: '/videos/project_1_demo_1.mp4',
+            type: 'video/mp4',
+            poster: '/images/social-card.png'
+          },
+          { src: '/videos/atom_final_demo.mp4', type: 'video/mp4' }
+        ],
+        columns: 'two',
+        href: 'https://github.com/relliant/WholeBodyControl-PolicyTraining'
+      },
+      {
+        id: 'humanoid-robot-music-conductor',
+        title: 'Humanoid Robot Music Conductor',
+        date: 'May 10, 2026 - May 21, 2026',
+        items: [
+          'Motion retargeting and denoising: Used GVHMR to extract human poses from symphony conducting videos. For temporal noise in dual-arm trajectories, applied filtering for smoothing, then remapped motion to humanoid joint space via inverse kinematics.',
+          'Upper-body control model training: Built a parallel simulation environment in Isaac Lab and trained a stable upper-body control policy with reinforcement learning, enabling stable walking together with simple and reliable upper-limb motions.',
+          'Control system deployment: Designed a fused architecture for dual-arm control and lower-body balance, and fed smoothed target joint angles into the low-level PD controller at 50Hz, achieving high-fidelity, jitter-free conducting motions on real hardware.'
+        ],
+        videos: [
+          {
+            src: '/videos/project2_demo3.mp4',
+            type: 'video/mp4',
+            poster: '/images/social-card.png'
+          },
+          {
+            src: '/videos/project2_demo2.mov',
+            type: 'video/quicktime',
+            poster: '/images/social-card.png'
+          },
+          {
+            src: '/videos/conducting_demo_1.mov',
+            type: 'video/quicktime',
+            poster: '/images/social-card.png'
+          }
+        ],
+        columns: 'three',
+        href: 'https://github.com/relliant/WBC-data-processing'
+      },
+      {
+        id: 'yolov8-and-moveit2-based-object-pick-and-place',
+        title: 'YOLOv8 and MoveIt 2 based Object Pick-and-Place',
+        date: 'Oct 16, 2025 - Dec 29, 2025',
+        items: [
+          'Project overview: Built a full object pick-and-place pipeline for a humanoid robot in Isaac Sim, using YOLOv8 for object detection and MoveIt 2 for dual-arm motion planning. The system completed grasping through inverse kinematics in simulation and was finally deployed on real hardware to grasp specified objects.',
+          'High-fidelity simulation platform: Created a realistic Isaac Sim environment, configured USD assets, and provided the base simulation platform for algorithm validation. Implemented ROS2 SDK interfaces consistent with the real robot and used ZMQ to bridge ROS and Isaac Sim communication.',
+          'VLM deployment and object recognition: Deployed a VLM on the robot body so the robot could identify target objects, and used camera calibration to perform accurate TF transformations from perception results to the target grasp pose.',
+          'MoveIt 2 configuration and IK solving: Configured MoveIt 2 for the humanoid robot dual arms, enabling the robot to receive Cartesian-space grasp targets, convert them into joint-space commands through inverse kinematics, and execute correct grasping motions through ROS interfaces.'
+        ],
+        videos: [
+          {
+            src: '/videos/grasp_ik_demo1.mp4',
+            type: 'video/mp4',
+            poster: '/images/social-card.png'
+          },
+          {
+            src: '/videos/grasp_ik_demo2.mov',
+            type: 'video/quicktime',
+            poster: '/images/social-card.png'
+          }
+        ],
+        columns: 'two'
+      },
+      {
+        id: 'simulation-and-control-of-the-tiago-mobile-manipulator-in-gazebo',
+        title: 'Simulation and Control of the TIAGo Mobile Manipulator in Gazebo',
+        date: 'May 16, 2025 - May 29, 2025',
+        items: [
+          'Mobile manipulation planning: Implemented a full pick-and-place pipeline for the TIAGo mobile manipulator in Gazebo using ROS and MoveIt!.',
+          'Motion planning and arm control: Configured the OMPL planner library (RRT and RRT*) for joint-space path planning and designed a custom time-parameterization method to smooth trajectory velocity.',
+          'Autonomous navigation and obstacle avoidance: Built a navigation stack with Gmapping and Move Base, and combined it with ArUco pose feedback to achieve precise end-effector alignment and placement.'
+        ]
+      }
+    ]
+  },
+  zh: {
+    back: '返回',
+    title: '项目经历',
+    intro: '详细项目经历与技术亮点。',
+    projectAddress: '项目地址',
+    projects: [
+      {
+        id: 'deployment-of-a-full-body-motion-control-algorithm-for-humanoid-robots',
+        title: '人形机器人全身控制算法部署',
+        date: '2026 年 4 月 10 日 - 2026 年 5 月 7 日',
+        items: [
+          '动作重定向：基于开源 GMR 工具包进行二次开发，完成 Walker Tienkung（1.73m、65kg、30 自由度）的运动学适配，并将 npz、bvh、fbx 格式的人体动作捕捉数据转换为机器人可执行的 pkl 关节轨迹。',
+          '强化学习训练：基于 Isaac Lab/Gym 搭建分布式并行仿真环境，使用 PPO 和 AMP 训练控制策略；结合 reward 曲线分析迭代优化奖励设计，并在高保真 MuJoCo 环境中完成 Sim2Sim 策略迁移验证。',
+          '真机部署（Sim2Real）：针对真机动力学差异，加入域随机化与延迟信号增强以提升鲁棒性，最终在 Walker Tienkung 机器人上实现零样本轨迹跟踪与稳定行走。',
+          '论文撰写：基于该项目总结研究成果并撰写论文 ATOM: A Training Framework for Humanoid Behavior Foundation Models with Imperfect Data，目前投稿 NeurIPS 2026（审稿中）。'
+        ],
+        videos: [
+          {
+            src: '/videos/project_1_demo_1.mp4',
+            type: 'video/mp4',
+            poster: '/images/social-card.png'
+          },
+          { src: '/videos/atom_final_demo.mp4', type: 'video/mp4' }
+        ],
+        columns: 'two',
+        href: 'https://github.com/relliant/WholeBodyControl-PolicyTraining'
+      },
+      {
+        id: 'humanoid-robot-music-conductor',
+        title: '人形机器人音乐指挥',
+        date: '2026 年 5 月 10 日 - 2026 年 5 月 21 日',
+        items: [
+          '动作重定向与降噪：使用 GVHMR 从交响乐指挥视频中提取人体姿态；针对双臂轨迹的时间噪声进行滤波平滑，并通过逆运动学将动作重映射到人形机器人关节空间。',
+          '上半身控制模型训练：在 Isaac Lab 中搭建并行仿真环境，使用强化学习训练稳定的上半身控制策略，使机器人能够在保持稳定行走的同时执行简洁可靠的上肢动作。',
+          '控制系统部署：设计双臂控制与下肢平衡融合架构，并以 50Hz 将平滑后的目标关节角输入底层 PD 控制器，在真机上实现高保真、低抖动的指挥动作。'
+        ],
+        videos: [
+          {
+            src: '/videos/project2_demo3.mp4',
+            type: 'video/mp4',
+            poster: '/images/social-card.png'
+          },
+          {
+            src: '/videos/project2_demo2.mov',
+            type: 'video/quicktime',
+            poster: '/images/social-card.png'
+          },
+          {
+            src: '/videos/conducting_demo_1.mov',
+            type: 'video/quicktime',
+            poster: '/images/social-card.png'
+          }
+        ],
+        columns: 'three',
+        href: 'https://github.com/relliant/WBC-data-processing'
+      },
+      {
+        id: 'yolov8-and-moveit2-based-object-pick-and-place',
+        title: '基于 YOLOv8 和 MoveIt 2 的物体抓取与放置',
+        date: '2025 年 10 月 16 日 - 2025 年 12 月 29 日',
+        items: [
+          '项目概述：基于 YOLOv8 实现物体识别，并为人形机器人双臂配置 MoveIt 2，在 Isaac Sim 仿真平台中通过逆运动学实现抓取放置全流程，最终在真机上完成指定物品抓取。',
+          '高保真仿真平台搭建：基于 Isaac Sim 搭建高保真仿真环境并配置 USD 资产，为团队算法验证提供基础仿真平台；同时在 Isaac Sim 中搭建与真机一致的 ROS2 SDK 接口，并通过 ZMQ 实现 ROS 到 Isaac Sim 的通信。',
+          'VLM 模型部署与物体识别：在机器人本体上部署 VLM，使机器人能够识别指定物品，并通过相机标定完成准确的 TF 转换，得到目标抓取位置。',
+          'MoveIt 2 配置与 IK 解算：为人形机器人双臂配置 MoveIt 2，使机器人能够接收笛卡尔空间目标抓取位姿，通过逆运动学转换为关节空间命令，并经由 ROS 接口执行正确抓取动作。'
+        ],
+        videos: [
+          {
+            src: '/videos/grasp_ik_demo1.mp4',
+            type: 'video/mp4',
+            poster: '/images/social-card.png'
+          },
+          {
+            src: '/videos/grasp_ik_demo2.mov',
+            type: 'video/quicktime',
+            poster: '/images/social-card.png'
+          }
+        ],
+        columns: 'two'
+      },
+      {
+        id: 'simulation-and-control-of-the-tiago-mobile-manipulator-in-gazebo',
+        title: 'TIAGo 移动机械臂在 Gazebo 中的仿真与控制',
+        date: '2025 年 5 月 16 日 - 2025 年 5 月 29 日',
+        items: [
+          '移动操作规划：基于 ROS 和 MoveIt! 在 Gazebo 中实现 TIAGo 移动机械臂完整抓取放置流程。',
+          '运动规划与机械臂控制：配置 OMPL 规划库（RRT 和 RRT*）进行关节空间路径规划，并设计自定义时间参数化方法以平滑轨迹速度。',
+          '自主导航与避障：搭建包含 Gmapping 和 Move Base 的导航栈，并结合 ArUco 位姿反馈实现末端执行器精准对齐与放置。'
+        ]
+      }
+    ]
+  }
+}
+
+const t = copy[lang]
+const backHref = isZh ? '/zh' : '/'
+---
+
+<Button title={t.back} href={backHref} variant='back' />
+<main class='mt-6 lg:mt-10'>
+  <div id='content-header' class='animate'>
+    <h1 class='mb-6 mt-6 text-3xl font-medium sm:mt-10'>{t.title}</h1>
+  </div>
+
+  <section
+    aria-label={t.title}
+    class='animate prose mt-8 max-w-none text-base md:min-w-[45ch]'
+    id='content'
+  >
+    <p>{t.intro}</p>
+
+    {
+      t.projects.map((project) => (
+        <>
+          <h2 id={project.id}>{project.title}</h2>
+          <Card subheading={project.date}>
+            <ul class='ms-4 list-disc text-muted-foreground'>
+              {project.items.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+            {'videos' in project && project.videos && (
+              <div
+                class:list={[
+                  'not-prose mb-3 grid grid-cols-1 gap-3 sm:grid-cols-2',
+                  project.columns === 'three' && 'lg:grid-cols-3'
+                ]}
+              >
+                {project.videos.map((video) => (
+                  <video
+                    class='aspect-video w-full rounded-xl border object-cover'
+                    controls
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    preload='metadata'
+                    poster={video.poster}
+                  >
+                    <source src={video.src} type={video.type} />
+                    Your browser does not support the video tag.
+                  </video>
+                ))}
+              </div>
+            )}
+            {'href' in project && project.href && (
+              <div class='not-prose mt-3'>
+                <Button
+                  title={t.projectAddress}
+                  href={project.href}
+                  target='_blank'
+                  variant='ahead'
+                />
+              </div>
+            )}
+          </Card>
+        </>
+      ))
+    }
+  </section>
+</main>

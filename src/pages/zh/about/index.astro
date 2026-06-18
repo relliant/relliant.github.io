@@ -1,0 +1,73 @@
+---
+import { Spoiler, Timeline } from 'astro-pure/user'
+import PageLayout from '@/layouts/BaseLayout.astro'
+import Substats from '@/components/about/Substats.astro'
+
+const meta = {
+  title: '关于',
+  description: '关于罗思宇'
+}
+---
+
+<PageLayout {meta} lang='zh'>
+  <main class='mt-6 lg:mt-10'>
+    <div id='content-header' class='animate'>
+      <h1 class='mb-6 mt-6 text-3xl font-medium sm:mt-10'>关于</h1>
+    </div>
+
+    <section
+      aria-label='关于'
+      id='content'
+      class='animate prose mt-8 max-w-none text-base md:min-w-[45ch]'
+    >
+      <p>开发者 / 硕士研究生</p>
+      <p>
+        你好！我是深圳大学应用技术学院计算机技术专业硕士研究生，目前的研究方向是基于学习的人形机器人全身控制。我的长期目标是构建真正智能、能够自然融入并服务真实人类环境的人形机器人。
+      </p>
+      <p>
+        Motto: idealism & realism <Spoiler>全面发展，出类拔萃</Spoiler>
+      </p>
+
+      <h2 id='hobbies'>兴趣爱好</h2>
+      <ul>
+        <li>运动与健康：健身、跑步、游泳、篮球。</li>
+        <li>社交与游戏：桌游、剧本杀、解谜游戏。</li>
+        <li>休闲：阅读、音乐、动漫。</li>
+        <li>动手精神：硬件维修、DIY 改造和创意制作。</li>
+      </ul>
+
+      <h2 id='social-networks'>社交网络</h2>
+      <Substats
+        stats={[
+          {
+            platform: 'GitHub',
+            icon: 'github',
+            link: 'https://github.com/relliant',
+            text: 'followers',
+            api: 'github/relliant'
+          },
+          {
+            platform: 'Rednote',
+            icon: 'link',
+            color: '#2ca5e0',
+            link: 'https://www.xiaohongshu.com/user/profile/661dd3e600000000030324b4',
+            text: 'subscribers',
+            api: 'rednote/jiata'
+          }
+        ]}
+      />
+
+      <h2 id='news'>动态</h2>
+      <p>网站历史：</p>
+      <Timeline
+        events={[
+          {
+            date: '2026-05-26',
+            content:
+              'Website inspired by <a href="https://astro.build/" target="_blank">Astro</a> and <a href="https://github.com/srleom/astro-theme-resume" target="_blank">Astro Theme Resume</a>'
+          }
+        ]}
+      />
+    </section>
+  </main>
+</PageLayout>
